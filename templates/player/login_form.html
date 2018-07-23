@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block content %}
+	
+	<form role="form"
+			action="{% url 'player_login' %}"
+			method="post">
+<!-- for security django won't work without it -->
+		{% csrf_token %}
+
+		<p>Please Login</p>
+
+<!-- form is inbuilt which gives fields for only username and password -->
+		{{ form | crispy }}
+
+		<button type="submit" class="btn btn-success">
+			Sign In
+		</button>
+
+	</form>
+
+{% endblock %}

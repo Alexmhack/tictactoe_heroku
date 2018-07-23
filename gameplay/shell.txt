@@ -1,0 +1,77 @@
+you can perform many operation in the python interactive
+shell.
+
+you can activate shell using 
+
+>>> python manage.py shell
+
+then you can import your classes from the models or your
+functions from the views.
+
+>>> from gameplay.models import Game, Move
+
+by default the models come with a model manager, called 
+'objects'
+
+>>> Game.objects
+
+there are many operations on this manager
+
+>>> Game.objects.all()
+this returns all the instances of the class Game
+
+>>> Game.objects.get(pk=1)
+this return the object with the id = 1 or pk = 1
+django gives id/pk to all the objects by default
+
+>>> Game.objects.filter(status="F")
+you can filter through the objects using the filter method
+on the objects which takes in the argument to filter
+
+argument can be any field inside the models class
+
+>>> Game.objects.exclude(first_player__username="pranav")
+above, we use the counter part of the filter, exclude
+and we also use the attribute on the first_player, 
+__username, mark the two underscores at the beginning.
+
+this gives us the __username from the first_player
+
+likewise you can use other properties of the first_player
+if they exist.
+
+You can also change the database from here, 
+
+>>> first = Game.objects.get(pk=1)
+now first variable has the object with the id of 1
+
+you can use 'first' in many ways
+
+>>> first.id
+1
+
+>>> first.status
+'F'
+
+>>> first.status = 'W'
+>>> first.save()
+this will save the 'W' inside the status of the 'first'
+
+>>> first.move_set
+move_set is the default name given to the Move class manager
+
+>>> first.move_set.all()
+>>> first.move_set.count()
+
+>>> first.game
+return the first_player and the second_player because we have 
+set the __str__ method in the Game class
+
+>>> first.move_set.exclude(comment="")
+this will return all the moves with comments
+
+>>> first.delete()
+this deletes the instance
+
+after making any changes inside the DB, don't forget to save it
+using the .save()
